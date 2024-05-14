@@ -1,0 +1,38 @@
+{
+  "name": {
+    "project_name": "📺 国产化示波器",
+    "versions": "v0.1"
+  },
+  "baseUrl": "https://render.alipay.com/p/yuyan/180020010001215413",
+  "webSocketUrl": "wss://ws.postman-echo.com/raw",
+  "menu_link": {
+    "items": [
+      {
+        "id": 1,
+        "label": "波形查看",
+        "url": "/index",
+        "icon": "home"
+      },
+      {
+        "label": "历史记录",
+        "url": "/history",
+        "icon": "history"
+      }
+    ]
+  },
+  "menu_extend": {
+    "items": [
+      {
+        "id": 1,
+        "label": "设置",
+        "url": "/",
+        "icon": "setting"
+      },
+      {
+        "label": "文档支持",
+        "url": "/document",
+        "icon": "document"
+      }
+    ]
+  }
+}
