@@ -146,7 +146,7 @@ export default function OscilloscopePanel() {
             value={osChangeSnap.sampleStepChange}
             onChange={handleSampleStepChange}
           />
-          S
+          s
         </div>
       </div>
       <div className="mb-4">
