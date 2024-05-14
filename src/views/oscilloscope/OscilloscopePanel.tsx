@@ -48,6 +48,7 @@ export default function OscilloscopePanel() {
 
   {
     /*创建 ws状态 */
+    
   }
   const connectionStatus = {
     0: "正在连接",
