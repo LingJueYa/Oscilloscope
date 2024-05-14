@@ -1,6 +1,9 @@
+{
+  /*导入 波形发生器 图表 组件 */
+}
 import { Line } from "@ant-design/plots";
 
-export default function OscilloscopeChart() {
+export default function WaveGenChart() {
   const config = {
     data: {
       type: "fetch",
@@ -16,12 +19,22 @@ export default function OscilloscopeChart() {
         },
       ],
     },
-    xField: "输出电压/V",
-    yField: "Div",
+    xField: (d) => new Date(d.date),
+    yField: "close",
     connectNulls: {
       connect: true,
       connectStroke: "#aaa",
     },
+    axis: {
+      x: {},
+      y: {},
+      line: true,
+      arrow: true,
+    },
   };
-  return <Line {...config} />;
+  return (
+    <div className="w-full h-full mt-10">
+      <Line {...config} />
+    </div>
+  );
 }

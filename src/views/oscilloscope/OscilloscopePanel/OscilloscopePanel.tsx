@@ -25,7 +25,7 @@ import { Button, Space } from "antd";
   /*导入 全局 状态管理 */
 }
 import { useSnapshot } from "valtio";
-import { osChange } from "../../store/os";
+import { osChange } from "../../../store/os";
 {
   /*导入 websocket */
 }
@@ -33,7 +33,7 @@ import { useWebSocket } from "ahooks";
 {
   /*导入 全局配置文件 */
 }
-import setting from "../../../public/json/setting.json";
+import setting from "../../../../public/json/setting.json";
 
 export default function OscilloscopePanel() {
   {
@@ -48,7 +48,6 @@ export default function OscilloscopePanel() {
 
   {
     /*创建 ws状态 */
-    
   }
   const connectionStatus = {
     0: "正在连接",
@@ -108,7 +107,7 @@ export default function OscilloscopePanel() {
   }
 
   return (
-    <div className="flex flex-col justify-center h-full ">
+    <div className="flex flex-col h-full ">
       <span className="mb-6 text-2xl text-black font-bold">示波器面板</span>
       <div className="flex gap-4 mb-2">
         <Button
@@ -126,27 +125,29 @@ export default function OscilloscopePanel() {
           停止
         </Button>
       </div>
-      <div className="mb-4">
-        <span className="mr-3 text-black">采样频率/Hz</span>
-        <InputNumber
-          size="large"
-          min={1}
-          max={100000}
-          value={osChangeSnap.sampleRateChange}
-          onChange={handleSampleRateChange}
-        />
-      </div>
-      <div className="mb-4">
-        <span className="mr-3 text-black">取样间隔</span>
-        <InputNumber
-          size="large"
-          min={1}
-          max={100000}
-          className="mr-2"
-          value={osChangeSnap.sampleStepChange}
-          onChange={handleSampleStepChange}
-        />
-        S
+      <div className="flex">
+        <div className="mb-4 mr-6">
+          <span className="mr-3 text-black">采样频率/Hz</span>
+          <InputNumber
+            size="large"
+            min={1}
+            max={100000}
+            value={osChangeSnap.sampleRateChange}
+            onChange={handleSampleRateChange}
+          />
+        </div>
+        <div className="mb-4">
+          <span className="mr-3 text-black">取样间隔</span>
+          <InputNumber
+            size="large"
+            min={1}
+            max={100000}
+            className="mr-2"
+            value={osChangeSnap.sampleStepChange}
+            onChange={handleSampleStepChange}
+          />
+          S
+        </div>
       </div>
       <div className="mb-4">
         <span className="mr-3 text-black">触发方式</span>

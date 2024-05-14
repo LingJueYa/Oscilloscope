@@ -1,6 +1,9 @@
+{
+  /*导入 示波器 图表 组件 */
+}
 import { Line } from "@ant-design/plots";
 
-export default function WaveGeneratorChart() {
+export default function OscilloscopeChart() {
   const config = {
     data: {
       type: "fetch",
@@ -16,18 +19,16 @@ export default function WaveGeneratorChart() {
         },
       ],
     },
-    xField: (d) => new Date(d.date),
-    yField: "close",
+    xField: "输出电压/V",
+    yField: "Div",
     connectNulls: {
       connect: true,
       connectStroke: "#aaa",
     },
-    axis: {
-      x: {},
-      y: {},
-      line: true,
-      arrow: true,
-    },
   };
-  return <Line {...config} />;
+  return (
+    <div className="w-full h-full mt-10">
+      <Line {...config} />
+    </div>
+  );
 }

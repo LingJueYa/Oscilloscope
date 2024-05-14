@@ -17,7 +17,16 @@ import { Route, Routes } from "react-router-dom";
   /*导入 导航栏 组件*/
 }
 import App from "../App";
-import Home from "../views/home/Home";
+{
+  /*导入 示波器 组件 */
+}
+import Oscilloscope from "../views/oscilloscope/Oscilloscope";
+{
+  /*导入 波形发生器 组件 */
+}
+const WaveGenerator = lazy(
+  () => import("../views/waveGenerator/WaveGenerator")
+);
 {
   /*导入 历史记录 组件 */
 }
@@ -32,12 +41,28 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Oscilloscope />} />
+        <Route
+          path="/wavegen"
+          element={
+            <Suspense>
+              <WaveGenerator />
+            </Suspense>
+          }
+        />
         <Route
           path="/history"
           element={
             <Suspense>
               <History />
+            </Suspense>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Suspense>
+              <Notfound />
             </Suspense>
           }
         />

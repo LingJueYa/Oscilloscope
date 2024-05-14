@@ -25,6 +25,7 @@ import {
   SettingOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  SwapOutlined,
 } from "@ant-design/icons";
 {
   /*导入 目录、侧边栏 组件 */
@@ -52,23 +53,29 @@ export default function Menus() {
     {
       key: "1",
       icon: <LineChartOutlined />,
-      label: "波形图",
+      label: "示波器",
       onClick: () => navigate("/"),
     },
     {
       key: "2",
+      icon: <SwapOutlined />,
+      label: "波形发生器",
+      onClick: () => navigate("/wavegen"),
+    },
+    {
+      key: "3",
       icon: <ClockCircleOutlined />,
       label: "历史记录",
       onClick: () => navigate("/history"),
     },
     {
-      key: "3",
+      key: "4",
       icon: <SettingOutlined />,
       label: "设置",
       onClick: () => navigate("/setting"),
     },
     {
-      key: "4",
+      key: "5",
       icon: <CopyOutlined />,
       label: "文档支持",
       onClick: () => navigate("/document"),
