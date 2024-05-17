@@ -14,18 +14,6 @@ import Router from "./config/router";
   /*导入 滚动到顶部 组件*/
 }
 import ScrollToTop from "./components/ScrollToTop";
-{
-  /*导入 axios */
-}
-import axios from "axios";
-{
-  /*导入 全局 配置 文件 */
-}
-import setting from "../public/json/setting.json";
-{
-  /*配置 axios 请求前缀 */
-}
-axios.defaults.baseURL = setting.baseUrl;
 
 {
   /*

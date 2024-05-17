@@ -13,6 +13,7 @@
     "@ant-design/charts": "^2.1.1",
     "@ant-design/icons": "^5.3.7",
     "@arction/lcjs": "^5.2.0",
+    "@arction/lcjs-themes": "^3.2.1",
     "@fancyapps/ui": "^5.0.24",
     "@fuyun/generative-ai": "^0.2.0",
     "@google/generative-ai": "^0.2.0",

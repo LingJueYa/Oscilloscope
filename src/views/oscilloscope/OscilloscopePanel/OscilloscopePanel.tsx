@@ -4,7 +4,7 @@
 {
   /*导入 useEffect */
 }
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo, useCallback } from "react";
 {
   /*导入 单选框 组件 */
 }
@@ -20,7 +20,7 @@ import { message } from "antd";
 {
   /*导入 按钮 组件 */
 }
-import { Button, Space } from "antd";
+import { Button } from "antd";
 {
   /*导入 全局 状态管理 */
 }
@@ -73,38 +73,45 @@ export default function OscilloscopePanel() {
   {
     /*定义 采样频率 提交函数 */
   }
-  const handleSampleRateChange = (value) => {
-    osChange.sampleRateChange = value;
-    sendMessage && sendMessage(`${value}`);
-  };
+  const handleSampleRateChange = useCallback(
+    (value) => {
+      osChange.sampleRateChange = value;
+      if (sendMessage) {
+        sendMessage && sendMessage(`${value}`);
+      }
+    },
+    [sendMessage]
+  );
   {
     /*定义 取样间隔 提交函数 */
   }
-  const handleSampleStepChange = (value) => {
-    osChange.sampleStepChange = value;
-    sendMessage && sendMessage(`${value}`);
-  };
+  const handleSampleStepChange = useCallback(
+    (value) => {
+      osChange.sampleStepChange = value;
+      if (sendMessage) {
+        sendMessage && sendMessage(`${value}`);
+      }
+    },
+    [sendMessage]
+  );
   {
     /*定义 触发方式 提交函数 */
   }
-  const handleTriggerModeChange = (e) => {
-    osChange.triggerModeChange = e.target.value;
-    sendMessage && sendMessage(`${e.target.value}`);
-  };
+  const handleTriggerModeChange = useCallback(
+    (e) => {
+      osChange.triggerModeChange = e.target.value;
+      if (sendMessage) {
+        sendMessage && sendMessage(`${e.target.value}`);
+      }
+    },
+    [sendMessage]
+  );
 
-  {
-    // 测试 提交
-    // const messageHistory = useRef<any[]>([]);
-    // messageHistory.current = useMemo(
-    //   () => messageHistory.current.concat(latestMessage),
-    //   [latestMessage]
-    // );
-    // {messageHistory.current.map((message, index) => (
-    //   <p key={index} style={{ wordWrap: "break-word" }}>
-    //     {message?.data}
-    //   </p>
-    //))}
-  }
+  // const messageHistory = useRef<any[]>([]);
+  // messageHistory.current = useMemo(
+  //   () => messageHistory.current.concat(latestMessage),
+  //   [latestMessage]
+  // );
 
   return (
     <div className="flex flex-col h-full ">
@@ -159,6 +166,14 @@ export default function OscilloscopePanel() {
           <Radio value={5}>单次</Radio>
         </Radio.Group>
       </div>
+      {/* <div>
+        <p>received message: </p>
+        {messageHistory.current.map((message, index) => (
+          <p key={index} style={{ wordWrap: "break-word" }}>
+            {message?.data}
+          </p>
+        ))}
+      </div> */}
     </div>
   );
 }

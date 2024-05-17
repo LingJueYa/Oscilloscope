@@ -1,7 +1,7 @@
 {
   /*菜单 组件 */
 }
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 {
   /*导入 配置 文件 */
 }
@@ -33,6 +33,13 @@ import {
 import { Affix, Button, Menu, Layout } from "antd";
 const { Sider } = Layout;
 
+const iconMapping = {
+  "<LineChartOutlined />": <LineChartOutlined />,
+  "<ClockCircleOutlined />": <ClockCircleOutlined />,
+  "<SettingOutlined />": <SettingOutlined />,
+  "<CopyOutlined />": <CopyOutlined />,
+};
+
 export default function Menus() {
   {
     /*创建全局状态快照 */
@@ -46,41 +53,25 @@ export default function Menus() {
     /*获取 useNavigate 钩子函数，用于路由跳转 */
   }
   const navigate = useNavigate();
+  const handleNavigate = useCallback(
+    (url) => {
+      navigate(url);
+    },
+    [navigate]
+  );
   {
     /*定义 菜单 */
   }
-  const items: any[] = [
-    {
-      key: "1",
-      icon: <LineChartOutlined />,
-      label: "示波器",
-      onClick: () => navigate("/"),
-    },
-    {
-      key: "2",
-      icon: <SwapOutlined />,
-      label: "波形发生器",
-      onClick: () => navigate("/wavegen"),
-    },
-    {
-      key: "3",
-      icon: <ClockCircleOutlined />,
-      label: "历史记录",
-      onClick: () => navigate("/history"),
-    },
-    {
-      key: "4",
-      icon: <SettingOutlined />,
-      label: "设置",
-      onClick: () => navigate("/setting"),
-    },
-    {
-      key: "5",
-      icon: <CopyOutlined />,
-      label: "文档支持",
-      onClick: () => navigate("/document"),
-    },
-  ];
+  const items = useMemo(
+    () =>
+      settings.menu_link.items.map((item) => ({
+        key: item.id,
+        icon: iconMapping[item.icon],
+        label: item.label,
+        onClick: () => handleNavigate(item.url),
+      })),
+    [handleNavigate]
+  );
 
   return (
     <Affix offsetTop={top}>

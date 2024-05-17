@@ -2,10 +2,6 @@
   /*示波器控制面板组件 */
 }
 {
-  /*导入 全局 状态管理 */
-}
-import { useSnapshot } from "valtio";
-{
   /*导入 示波器 控制面板 组件 */
 }
 import OscilloscopePanel from "../oscilloscope/OscilloscopePanel/OscilloscopePanel";

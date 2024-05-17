@@ -22,12 +22,6 @@ import App from "../App";
 }
 import Oscilloscope from "../views/oscilloscope/Oscilloscope";
 {
-  /*导入 波形发生器 组件 */
-}
-const WaveGenerator = lazy(
-  () => import("../views/waveGenerator/WaveGenerator")
-);
-{
   /*导入 历史记录 组件 */
 }
 const History = lazy(() => import("../views/history/History"));
@@ -42,14 +36,6 @@ const Router = () => {
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="/" element={<Oscilloscope />} />
-        <Route
-          path="/wavegen"
-          element={
-            <Suspense>
-              <WaveGenerator />
-            </Suspense>
-          }
-        />
         <Route
           path="/history"
           element={
