@@ -3,7 +3,7 @@
     "project_name": "📺 国产化示波器",
     "versions": "v0.2"
   },
-  "webSocketUrl": "wss://ws.postman-echo.com/raw",
+  "webSocketUrl": "ws://localhost:8080/view/ws",
   "menu_link": {
     "items": [
       {

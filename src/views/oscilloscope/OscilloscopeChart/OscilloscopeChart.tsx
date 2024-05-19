@@ -123,7 +123,7 @@ const OscilloscopeChart = () => {
   return (
     <div
       ref={chartContainerRef}
-      style={{ height: "500px", width: "1100px" }}
+      style={{ height: "460px", width: "1100px", marginTop: "40px" }}
     ></div>
   );
 };

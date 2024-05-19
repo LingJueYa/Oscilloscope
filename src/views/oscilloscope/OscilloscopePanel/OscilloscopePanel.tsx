@@ -12,7 +12,7 @@ import { Flex, Radio } from "antd";
 {
   /*导入 输入框 组件 */
 }
-import { InputNumber } from "antd";
+import { InputNumber, Input } from "antd";
 {
   /*导入 全局 信息组件 */
 }
@@ -106,7 +106,14 @@ export default function OscilloscopePanel() {
     },
     [sendMessage]
   );
+  {
+    /*定义 保存波形标注 提交函数 */
+  }
+  const handleSaveWaveInput = (e) => {
+    osChange.input = e.target.value;
+  };
 
+  //test
   // const messageHistory = useRef<any[]>([]);
   // messageHistory.current = useMemo(
   //   () => messageHistory.current.concat(latestMessage),
@@ -131,6 +138,21 @@ export default function OscilloscopePanel() {
         >
           停止
         </Button>
+        <div className="flex items-center">
+          <span className="text-black">请输入波形标注：</span>
+          <Input
+            placeholder="给波形起一个名字吧"
+            className="w-40 h-10 mr-4"
+            onChange={handleSaveWaveInput}
+          />
+          <Button
+            type="primary"
+            onClick={() => osChange.savewave()}
+            disabled={readyState === 3}
+          >
+            保存当前波形
+          </Button>
+        </div>
       </div>
       <div className="flex">
         <div className="mb-4 mr-6">
@@ -143,7 +165,7 @@ export default function OscilloscopePanel() {
             onChange={handleSampleRateChange}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-4 text-black">
           <span className="mr-3 text-black">取样间隔</span>
           <InputNumber
             size="large"
