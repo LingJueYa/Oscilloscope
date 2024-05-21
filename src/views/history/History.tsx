@@ -36,6 +36,7 @@ const History: React.FC = () => {
   useEffect(() => {
     historyStore.getHistory();
   }, []);
+
   return (
     <div className="w-screen h-screen bg-white overflow-hidden">
       {historySnapShot.isLoading ? (

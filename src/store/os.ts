@@ -23,6 +23,7 @@ export const osChange = proxy({
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       message.success("数据保存成功");
+      osChange.input = "";
   } catch (error) {
       osChange.error = error.message;
       message.error("数据保存失败:" + error.message)
