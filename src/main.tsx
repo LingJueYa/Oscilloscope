@@ -14,6 +14,10 @@ import Router from "./config/router";
   /*导入 滚动到顶部 组件*/
 }
 import ScrollToTop from "./components/ScrollToTop";
+{
+  /*导入 i18n 支持 */
+}
+import "./config/i18n";
 
 {
   /*

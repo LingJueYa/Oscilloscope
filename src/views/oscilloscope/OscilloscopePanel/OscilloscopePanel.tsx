@@ -4,11 +4,15 @@
 {
   /*导入 useEffect */
 }
-import { useEffect, useRef, useMemo, useCallback } from "react";
+import { useEffect, useCallback } from "react";
+{
+  /*导入i18n组件部分 */
+}
+import { useTranslation } from "react-i18next";
 {
   /*导入 单选框 组件 */
 }
-import { Flex, Radio } from "antd";
+import { Radio } from "antd";
 {
   /*导入 输入框 组件 */
 }
@@ -40,6 +44,10 @@ export default function OscilloscopePanel() {
     /*定义 全局状态 快照 */
   }
   const osChangeSnap = useSnapshot(osChange);
+  {
+    /*i18n */
+  }
+  const { t } = useTranslation();
   {
     /*定义 连接 websocket */
   }
@@ -111,6 +119,7 @@ export default function OscilloscopePanel() {
   }
   const handleSaveWaveInput = (e) => {
     osChange.input = e.target.value;
+    osChange.uploadTime = String(Date.now());
   };
 
   //test
@@ -122,26 +131,30 @@ export default function OscilloscopePanel() {
 
   return (
     <div className="flex flex-col h-full ">
-      <span className="mb-6 text-2xl text-black font-bold">示波器面板</span>
+      <span className="mb-6 text-2xl text-black font-bold">
+        {t("oscilloscope_panel")}
+      </span>
       <div className="flex gap-4 mb-2">
         <Button
           type="primary"
           onClick={() => connect && connect()}
           disabled={readyState === 1}
         >
-          运行
+          {t("run")}
         </Button>
 
         <Button
           onClick={() => disconnect && disconnect()}
           disabled={readyState === 3}
         >
-          停止
+          {t("stop")}
         </Button>
         <div className="flex items-center">
-          <span className="text-black">请输入波形标注：</span>
+          <span className="text-black">
+            {t("please_enter_the_waveform_label")}：
+          </span>
           <Input
-            placeholder="给波形起一个名字吧"
+            placeholder={t("give_the_waveform_a_name")}
             className="w-40 h-10 mr-4"
             onChange={handleSaveWaveInput}
           />
@@ -150,23 +163,25 @@ export default function OscilloscopePanel() {
             onClick={() => osChange.savewave()}
             disabled={readyState === 3}
           >
-            保存当前波形
+            {t("save_current_waveform")}
           </Button>
         </div>
       </div>
       <div className="flex">
         <div className="mb-4 mr-6">
-          <span className="mr-3 text-black">采样频率/Hz</span>
+          <span className="mr-3 text-black">{t("sample_frequency")}</span>
           <InputNumber
             size="large"
             min={1}
             max={100000}
+            className="mr-2"
             value={osChangeSnap.sampleRateChange}
             onChange={handleSampleRateChange}
           />
+          /Hz
         </div>
         <div className="mb-4 text-black">
-          <span className="mr-3 text-black">取样间隔</span>
+          <span className="mr-3 text-black">{t("sample_interval")}</span>
           <InputNumber
             size="large"
             min={1}
@@ -179,13 +194,13 @@ export default function OscilloscopePanel() {
         </div>
       </div>
       <div className="mb-4">
-        <span className="mr-3 text-black">触发方式</span>
+        <span className="mr-3 text-black">{t("trigger_mode")}</span>
         <Radio.Group defaultValue={3} onChange={handleTriggerModeChange}>
-          <Radio value={1}>无</Radio>
-          <Radio value={2}>上升沿</Radio>
-          <Radio value={3}>下降沿</Radio>
-          <Radio value={4}>自动</Radio>
-          <Radio value={5}>单次</Radio>
+          <Radio value={1}>{t("none")}</Radio>
+          <Radio value={2}>{t("rising_edge")}</Radio>
+          <Radio value={3}>{t("falling_edge")}</Radio>
+          <Radio value={4}>{t("auto")}</Radio>
+          <Radio value={5}>{t("once")}</Radio>
         </Radio.Group>
       </div>
       {/* <div>

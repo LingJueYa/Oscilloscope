@@ -1,0 +1,31 @@
+const en = {
+  project_name: "📺 Oscilloscope",
+  oscilloscope: "Oscilloscope",
+  history: "History",
+  setting: "Setting",
+  document: "Document",
+  not_found: "Sorry, the page you visited does not exist.",
+  back_home: "Back Home",
+  loading_history: "Loading history...",
+  number: "Number",
+  label: "Label",
+  save_time: "Save Time",
+  download: "Download",
+  delete: "Delete",
+  trigger_mode: "Trigger Mode",
+  once: "Once",
+  auto: "Auto",
+  none: "None",
+  rising_edge: "Rising Edge",
+  falling_edge: "Falling Edge",
+  sample_interval: "Sample Interval",
+  sample_frequency: "Sample Frequency",
+  save_current_waveform: "Save Current Waveform",
+  give_the_waveform_a_name: "Give the Waveform a Name",
+  please_enter_the_waveform_label: "Please enter the Waveform label",
+  run: "Run",
+    stop: "Stop",
+  oscilloscope_panel:"Oscilloscope Panel"
+};
+
+export default en;

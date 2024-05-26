@@ -1,50 +1,48 @@
 {
   /*菜单 组件 */
 }
-import { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 {
-  /*导入 配置 文件 */
+  /*导入i18n组件部分 */
 }
-import settings from "../../../public/json/setting.json";
+import { useTranslation } from "react-i18next";
+{
+  /*导入 menu */
+}
+import menuLink, { iconMapping } from "../../data/menuLink";
 {
   /*导入 全局 状态管理 */
 }
 import { useSnapshot } from "valtio";
 import { isOpenMenuState } from "../../store/isOpenMenu";
+import { i18nStore } from "../../store/i18n";
 {
   /*导入 Link 组件 */
 }
 import { useNavigate } from "react-router-dom";
-{
-  /*导入 图标 */
-}
-import {
-  LineChartOutlined,
-  ClockCircleOutlined,
-  CopyOutlined,
-  SettingOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  SwapOutlined,
-} from "@ant-design/icons";
+
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 {
   /*导入 目录、侧边栏 组件 */
 }
 import { Affix, Button, Menu, Layout } from "antd";
+{
+  /*导入 语言切换 按钮 */
+}
+import LangSwitcher from "../../components/LangSwitcher";
+
 const { Sider } = Layout;
 
-const iconMapping = {
-  "<LineChartOutlined />": <LineChartOutlined />,
-  "<ClockCircleOutlined />": <ClockCircleOutlined />,
-  "<SettingOutlined />": <SettingOutlined />,
-  "<CopyOutlined />": <CopyOutlined />,
-};
-
-export default function Menus() {
+const Menus: React.FC = () => {
+  {
+    /*i18n */
+  }
+  const { t, i18n } = useTranslation();
   {
     /*创建全局状态快照 */
   }
   const isOpenMenuSnap = useSnapshot(isOpenMenuState);
+  const i18nSnapshot = useSnapshot(i18nStore);
   {
     /*创建 菜单组件 固定状态 */
   }
@@ -54,7 +52,7 @@ export default function Menus() {
   }
   const navigate = useNavigate();
   const handleNavigate = useCallback(
-    (url) => {
+    (url: string) => {
       navigate(url);
     },
     [navigate]
@@ -64,14 +62,17 @@ export default function Menus() {
   }
   const items = useMemo(
     () =>
-      settings.menu_link.items.map((item) => ({
+      menuLink.map((item) => ({
         key: item.id,
-        icon: iconMapping[item.icon],
-        label: item.label,
+        icon: React.createElement(iconMapping[item.icon]),
+        label: t(item.label),
         onClick: () => handleNavigate(item.url),
       })),
-    [handleNavigate]
+    [handleNavigate, t]
   );
+  useEffect(() => {
+    i18n.changeLanguage((i18n.language = i18nSnapshot.language));
+  }, [i18nSnapshot.language]);
 
   return (
     <Affix offsetTop={top}>
@@ -81,7 +82,7 @@ export default function Menus() {
             <Sider trigger={null} collapsible collapsed={isOpenMenuSnap.fold}>
               <div className="flex justify-center">
                 <span className="mb-6 text-xl text-black font-bold">
-                  {isOpenMenuSnap.fold ? "📺" : settings.name.project_name}
+                  {isOpenMenuSnap.fold ? "📺" : t("project_name")}
                 </span>
               </div>
               <Menu
@@ -91,6 +92,9 @@ export default function Menus() {
                 items={items}
               />
             </Sider>
+            <div className="flex justify-center my-5">
+              <LangSwitcher />
+            </div>
           </div>
           <div className="flex justify-end pr-2">
             <Button
@@ -109,4 +113,5 @@ export default function Menus() {
       </div>
     </Affix>
   );
-}
+};
+export default Menus;

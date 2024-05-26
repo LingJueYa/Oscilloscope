@@ -3,6 +3,10 @@
 }
 import React, { useMemo, useEffect } from "react";
 {
+  /*导入i18n组件部分 */
+}
+import { useTranslation } from "react-i18next";
+{
   /*导入 全局状态  */
 }
 import { useSnapshot } from "valtio";
@@ -18,6 +22,10 @@ const History: React.FC = () => {
     /*创建状态快照 */
   }
   const historySnapShot = useSnapshot(historyStore);
+  {
+    /*i18n */
+  }
+  const { t } = useTranslation();
   {
     /* 定义数据 */
   }
@@ -41,21 +49,25 @@ const History: React.FC = () => {
     <div className="w-screen h-screen bg-white overflow-hidden">
       {historySnapShot.isLoading ? (
         <div className="flex justify-center items-center h-full text-black text-4xl">
-          加载历史记录中...
+          {t("loading_history")}
         </div>
       ) : (
         <div className="w-full h-full overflow-y-auto">
           <Table dataSource={data} className="w-full">
-            <Column title="序号" dataIndex="id" key="id" />
-            <Column title="标注" dataIndex="name" key="name" />
-            <Column title="保存时间" dataIndex="timestamp" key="timestamp" />
+            <Column title={t("number")} dataIndex="id" key="id" />
+            <Column title={t("label")} dataIndex="name" key="name" />
+            <Column
+              title={t("save_time")}
+              dataIndex="timestamp"
+              key="timestamp"
+            />
             <Column
               title="Action"
               key="action"
               render={(_: any) => (
                 <Space size="middle">
-                  <a>下载</a>
-                  <a>删除</a>
+                  <a>{t("download")}</a>
+                  <a>{t("delete")}</a>
                 </Space>
               )}
             />

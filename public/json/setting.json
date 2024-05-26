@@ -1,36 +1,4 @@
 {
-  "name": {
-    "project_name": "📺 国产化示波器",
-    "versions": "v0.2"
-  },
   "webSocketUrl": "ws://localhost:8080/view/ws",
-  "menu_link": {
-    "items": [
-      {
-        "id": 1,
-        "label": "示波器",
-        "icon": "<LineChartOutlined />",
-        "url": "/"
-      },
-      {
-        "id":2,
-        "label": "历史记录",
-        "icon": "<ClockCircleOutlined />",
-        "url": "/history"
-      },
-      {
-        "id":3,
-        "label":"设置",
-        "icon": "<SettingOutlined />",
-        "url": "/setting"
-      },
-      {
-        "id":4,
-        "label":"文档支持",
-        "icon": "<CopyOutlined />",
-        "url": "/document"
-      }
-    ]
-  },
-  "license":"0002-n6m7qpJbHJrjdKg3bdmg3TN3F3XAKwCou5OGQxuf92yvMrVheNja4z8Aqpu0C4xWMkxozm04ykIY2MsVaMj+aY2P-MEQCIE6g4qI20CFmC5rPoQ1x9TqrgAvYvduIKGjuqjFjWyfFAiBclNV6oHAmxlbtHuP3aRHL0zd6t7kO7NxpKCKJrNJFUQ=="
+  "license": "0002-n6m7qpJbHJrjdKg3bdmg3TN3F3XAKwCou5OGQxuf92yvMrVheNja4z8Aqpu0C4xWMkxozm04ykIY2MsVaMj+aY2P-MEQCIE6g4qI20CFmC5rPoQ1x9TqrgAvYvduIKGjuqjFjWyfFAiBclNV6oHAmxlbtHuP3aRHL0zd6t7kO7NxpKCKJrNJFUQ=="
 }

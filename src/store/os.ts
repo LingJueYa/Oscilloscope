@@ -6,18 +6,22 @@ export const osChange = proxy({
   sampleRateChange: 10000,
   sampleStepChange: 1,
   triggerModeChange: "3",
-  input:"",
+  input: "",
+  uploadTime:"",
   isLoading: true,
   error:null,
   savewave: async () => {
     try {
     osChange.isLoading = true;
-    const response = await fetch('http://localhost:8080/view/save', {
-      method: 'POST',
+    const response = await fetch("http://localhost:8080/view/save", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name:osChange.input })
+      body: JSON.stringify({
+        name: osChange.input,
+        uploadtime: osChange.uploadTime,
+      }),
     });
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
