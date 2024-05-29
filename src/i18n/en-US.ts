@@ -24,8 +24,10 @@ const en = {
   give_the_waveform_a_name: "Give the Waveform a Name",
   please_enter_the_waveform_label: "Please enter the Waveform label",
   run: "Run",
-    stop: "Stop",
-  oscilloscope_panel:"Oscilloscope Panel"
+  stop: "Stop",
+  oscilloscope_panel: "Oscilloscope Panel",
+  settings: "Settings",
+  language_setting: "Language Setting",
 };
 
 export default en;

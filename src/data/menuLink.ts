@@ -1,3 +1,6 @@
+{
+  /*菜单数据 */
+}
 import {
   LineChartOutlined,
   ClockCircleOutlined,
@@ -18,7 +21,7 @@ export interface MenuLinkItem {
   id: number;
   label: string;
   icon: keyof typeof iconMapping; // 使用 iconMapping 的键作为类型
-  url: string;
+  url?: string;
 }
 
 // 定义菜单项数据
@@ -39,7 +42,6 @@ const menuLink: MenuLinkItem[] = [
     id: 3,
     label: "setting",
     icon: "SettingOutlined",
-    url: "/setting",
   },
   {
     id: 4,

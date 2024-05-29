@@ -1,3 +1,6 @@
+{
+  /*项目信息 */
+}
 const basic: BasicConfig = {
   project_name: "📺 国产化示波器",
   versions: "v0.2",

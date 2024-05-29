@@ -1,52 +1,40 @@
 {
   /*菜单 组件 */
 }
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+
 {
-  /*导入i18n组件部分 */
+  /*导入React */
 }
+import React, { useState, useMemo, useCallback } from "react";
+{
+  /*导入第三方库 */
+}
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-{
-  /*导入 menu */
-}
-import menuLink, { iconMapping } from "../../data/menuLink";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { Affix, Button, Menu, Layout } from "antd";
 {
   /*导入 全局 状态管理 */
 }
 import { useSnapshot } from "valtio";
 import { isOpenMenuState } from "../../store/isOpenMenu";
-import { i18nStore } from "../../store/i18n";
+import { settingStore } from "../../store/settings";
 {
-  /*导入 Link 组件 */
+  /*导入数据 */
 }
-import { useNavigate } from "react-router-dom";
-
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-{
-  /*导入 目录、侧边栏 组件 */
-}
-import { Affix, Button, Menu, Layout } from "antd";
-{
-  /*导入 语言切换 按钮 */
-}
-import LangSwitcher from "../../components/LangSwitcher";
+import menuLink, { iconMapping } from "../../data/menuLink";
 
 const { Sider } = Layout;
 
 const Menus: React.FC = () => {
-  {
-    /*i18n */
-  }
-  const { t, i18n } = useTranslation();
-  {
-    /*创建全局状态快照 */
-  }
+  const { t } = useTranslation();
   const isOpenMenuSnap = useSnapshot(isOpenMenuState);
-  const i18nSnapshot = useSnapshot(i18nStore);
+  const settingSnapshot = useSnapshot(settingStore);
+
   {
     /*创建 菜单组件 固定状态 */
   }
-  const [top, setTop] = useState<number>(0);
+  const [top] = useState<number>(0);
   {
     /*获取 useNavigate 钩子函数，用于路由跳转 */
   }
@@ -58,21 +46,29 @@ const Menus: React.FC = () => {
     [navigate]
   );
   {
-    /*定义 菜单 */
+    /*根据菜单数据判断行为函数 */
   }
+  const handleMenuClick = useCallback(
+    (item) => {
+      if (item.url) {
+        handleNavigate(item.url);
+      } else if (item.label === "setting") {
+        settingSnapshot.isOpen();
+      }
+    },
+    [handleNavigate]
+  );
+
   const items = useMemo(
     () =>
       menuLink.map((item) => ({
         key: item.id,
         icon: React.createElement(iconMapping[item.icon]),
         label: t(item.label),
-        onClick: () => handleNavigate(item.url),
+        onClick: () => handleMenuClick(item),
       })),
-    [handleNavigate, t]
+    [t, handleMenuClick]
   );
-  useEffect(() => {
-    i18n.changeLanguage((i18n.language = i18nSnapshot.language));
-  }, [i18nSnapshot.language]);
 
   return (
     <Affix offsetTop={top}>
@@ -92,9 +88,6 @@ const Menus: React.FC = () => {
                 items={items}
               />
             </Sider>
-            <div className="flex justify-center my-5">
-              <LangSwitcher />
-            </div>
           </div>
           <div className="flex justify-end pr-2">
             <Button

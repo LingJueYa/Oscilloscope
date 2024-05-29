@@ -1,30 +1,26 @@
 {
   /*历史记录组件 */
 }
+
+{
+  /*导入React */
+}
 import React, { useMemo, useEffect } from "react";
 {
-  /*导入i18n组件部分 */
+  /*导入第三方库 */
 }
 import { useTranslation } from "react-i18next";
+import { Space, Table } from "antd";
 {
-  /*导入 全局状态  */
+  /*导入 全局 状态管理 */
 }
 import { useSnapshot } from "valtio";
 import { historyStore } from "../../store/history";
-{
-  /*导入antd组件 */
-}
-import { Space, Table } from "antd";
+
 const { Column } = Table;
 
 const History: React.FC = () => {
-  {
-    /*创建状态快照 */
-  }
   const historySnapShot = useSnapshot(historyStore);
-  {
-    /*i18n */
-  }
   const { t } = useTranslation();
   {
     /* 定义数据 */

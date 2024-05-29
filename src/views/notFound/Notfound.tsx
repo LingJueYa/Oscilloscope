@@ -1,19 +1,14 @@
 {
   /* NotFound 组件 */
 }
+
 {
-  /*导入 组件库 */
-}
-import { Button, Result } from "antd";
-{
-  /*导入i18n组件部分 */
+  /*导入第三方库 */
 }
 import { useTranslation } from "react-i18next";
+import { Button, Result } from "antd";
 
 export default function Notfound() {
-  {
-    /*i18n */
-  }
   const { t } = useTranslation();
   return (
     <div className="flex justify-center items-center w-full h-screen">

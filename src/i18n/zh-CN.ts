@@ -26,6 +26,8 @@ const zh = {
   run: "运行",
   stop: "停止",
   oscilloscope_panel: "示波器面板",
+  settings: "设置",
+  language_setting: "语言设置",
 };
 
 export default zh;

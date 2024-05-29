@@ -6,7 +6,7 @@
 }
 import React, { Suspense, lazy } from "react";
 {
-  /*导入 ReactDOM、Route 路由 */
+  /*导入第三方库 */
 }
 import { Route, Routes } from "react-router-dom";
 
@@ -26,8 +26,7 @@ import Oscilloscope from "../views/oscilloscope/Oscilloscope";
 }
 const History = lazy(() => import("../views/history/History"));
 {
-  /*导入 NotFound 组件
-  import Notfound from "../views/notFound/Notfound";*/
+  /*导入 NotFound 组件 */
 }
 const Notfound = lazy(() => import("../views/notFound/Notfound"));
 

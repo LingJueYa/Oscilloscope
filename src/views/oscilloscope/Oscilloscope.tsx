@@ -8,7 +8,7 @@ import OscilloscopePanel from "../oscilloscope/OscilloscopePanel/OscilloscopePan
 {
   /*导入 示波器 图表 组件 */
 }
-import OscilloscopeChart from "../oscilloscope/OscilloscopeChart/OscilloscopeChart";
+import OscilloscopeChart from "./OscilloscopeChart/OscilloscopeChart";
 
 export default function Oscilloscope() {
   return (
