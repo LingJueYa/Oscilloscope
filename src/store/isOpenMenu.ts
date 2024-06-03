@@ -4,7 +4,7 @@
 import { proxy } from "valtio";
 
 export const isOpenMenuState = proxy({
-  fold: false,
+  fold: true,
   isOpen: () => {
     isOpenMenuState.fold = !isOpenMenuState.fold;
   },

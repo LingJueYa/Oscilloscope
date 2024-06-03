@@ -6,12 +6,14 @@ import {
   ClockCircleOutlined,
   CopyOutlined,
   SettingOutlined,
+  DeploymentUnitOutlined,
 } from "@ant-design/icons";
 
 // 定义图标映射
 export const iconMapping: { [key: string]: React.ComponentType<any> } = {
   LineChartOutlined: LineChartOutlined,
   ClockCircleOutlined: ClockCircleOutlined,
+  DeploymentUnitOutlined: DeploymentUnitOutlined,
   SettingOutlined: SettingOutlined,
   CopyOutlined: CopyOutlined,
 };
@@ -28,24 +30,30 @@ export interface MenuLinkItem {
 const menuLink: MenuLinkItem[] = [
   {
     id: 1,
-    label: "oscilloscope",
+    label: "menus.oscilloscope",
     icon: "LineChartOutlined",
     url: "/",
   },
   {
     id: 2,
-    label: "history",
+    label: "menus.history",
     icon: "ClockCircleOutlined",
     url: "/history",
   },
   {
     id: 3,
-    label: "setting",
-    icon: "SettingOutlined",
+    label: "menus.analysis",
+    icon: "DeploymentUnitOutlined",
+    url: "/analysis",
   },
   {
     id: 4,
-    label: "document",
+    label: "menus.setting",
+    icon: "SettingOutlined",
+  },
+  {
+    id: 5,
+    label: "menus.document",
     icon: "CopyOutlined",
     url: "/document",
   },

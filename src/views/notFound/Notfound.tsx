@@ -15,8 +15,8 @@ export default function Notfound() {
       <Result
         status="404"
         title="404"
-        subTitle={t("not_found")}
-        extra={<Button type="primary">{t("back_home")}</Button>}
+        subTitle={t("notfound.not_found")}
+        extra={<Button type="primary">{t("notfound.back_home")}</Button>}
       />
     </div>
   );

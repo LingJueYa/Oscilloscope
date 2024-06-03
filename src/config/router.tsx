@@ -26,6 +26,14 @@ import Oscilloscope from "../views/oscilloscope/Oscilloscope";
 }
 const History = lazy(() => import("../views/history/History"));
 {
+  /*导入 分析 组件 */
+}
+const Analysis = lazy(() => import("../views/analysis/Analysis"));
+{
+  /*导入 文档 组件 */
+}
+const Document = lazy(() => import("../views/document/Document"));
+{
   /*导入 NotFound 组件 */
 }
 const Notfound = lazy(() => import("../views/notFound/Notfound"));
@@ -40,6 +48,22 @@ const Router = () => {
           element={
             <Suspense>
               <History />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/analysis"
+          element={
+            <Suspense>
+              <Analysis />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/document"
+          element={
+            <Suspense>
+              <Document />
             </Suspense>
           }
         />

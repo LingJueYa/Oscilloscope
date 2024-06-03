@@ -1,0 +1,97 @@
+/* 防止Json数据中的Pre不换行，代码块样式 */
+.article pre {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  padding: 10px;
+  overflow-x: auto;
+  border-width: 2px;
+  border-color: rgb(148, 163, 184);
+  border-radius: 0.5rem;
+}
+
+/* 创建一个新的伪元素，并设置其样式为单独的一行 */
+.article pre::before {
+  content: "代码块";
+  display: block;
+  width: 100%;
+  background-color: #f7f7f9;
+  text-align: center;
+  font-weight: bold;
+  user-select: text;
+}
+
+.article code {
+  width: 100%;
+  max-width: full;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  overflow-x: auto;
+  user-select: text;
+}
+.article p {
+  font-size: 20px !important;
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+.article li {
+  font-size: 20px !important;
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+.article p img {
+  margin-top: 25px !important;
+  margin-bottom: 25px !important;
+}
+/* 定义 h1 至 h5 标签的字号大小 */
+.article h1 {
+  font-size: 36px !important;
+  font-weight: 700 !important;
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+.article h2 {
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+.article h3 {
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+.article h4 {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+/* 定义 hr 标签的上下外边距 */
+.article hr {
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+}
+
+/* 自定义代码块样式 */
+.custom-code-style {
+  background: #f5f2f0;
+  padding: 1em;
+  border-radius: 8px;
+  overflow: auto;
+  font-family: "Fira Code", monospace;
+}
+
+/* 自定义内联代码样式 */
+.custom-inline-code {
+  background: #f5f2f0;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: "Fira Code", monospace;
+}

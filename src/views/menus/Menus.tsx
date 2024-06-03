@@ -52,7 +52,7 @@ const Menus: React.FC = () => {
     (item) => {
       if (item.url) {
         handleNavigate(item.url);
-      } else if (item.label === "setting") {
+      } else if (item.label === "menus.setting") {
         settingSnapshot.isOpen();
       }
     },
@@ -72,13 +72,17 @@ const Menus: React.FC = () => {
 
   return (
     <Affix offsetTop={top}>
-      <div className="w-auto h-screen bg-white overflow-hidden">
-        <div className="flex flex-col justify-between h-full py-4 border-r border-gray-200">
+      <div className="max-w-[200px] h-screen bg-white overflow-hidden">
+        <div
+          className={`flex flex-col justify-between h-full py-4 border-r border-gray-20 ${
+            isOpenMenuSnap.fold ? "w-16" : ""
+          }`}
+        >
           <div>
             <Sider trigger={null} collapsible collapsed={isOpenMenuSnap.fold}>
-              <div className="flex justify-center">
-                <span className="mb-6 text-xl text-black font-bold">
-                  {isOpenMenuSnap.fold ? "📺" : t("project_name")}
+              <div className="flex pl-5 mb-6 ">
+                <span className="text-xl text-black font-bold">
+                  {isOpenMenuSnap.fold ? "📺" : t("menus.project_name")}
                 </span>
               </div>
               <Menu
@@ -86,20 +90,22 @@ const Menus: React.FC = () => {
                 mode="inline"
                 inlineCollapsed={isOpenMenuSnap.fold}
                 items={items}
+                className={`px-2 ${isOpenMenuSnap.fold ? "w-16" : ""}`}
               />
             </Sider>
           </div>
           <div className="flex justify-end pr-2">
             <Button
-              type="primary"
               onClick={isOpenMenuSnap.isOpen}
               style={{ marginBottom: 16 }}
             >
-              {isOpenMenuSnap.fold ? (
-                <MenuUnfoldOutlined />
-              ) : (
-                <MenuFoldOutlined />
-              )}
+              <div className="flex justify-center items-center text-sky-500">
+                {isOpenMenuSnap.fold ? (
+                  <MenuUnfoldOutlined />
+                ) : (
+                  <MenuFoldOutlined />
+                )}
+              </div>
             </Button>
           </div>
         </div>
@@ -107,4 +113,4 @@ const Menus: React.FC = () => {
     </Affix>
   );
 };
-export default Menus;
+export default React.memo(Menus);

@@ -1,11 +1,15 @@
 {
   /*示波器顶级组件 */
 }
-
+{
+  /*导入 React */
+}
+import { useMemo, useCallback } from "react";
 {
   /*导入第三方库 */
 }
 import { Outlet } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 {
   /*导入全局样式 */
 }
@@ -28,16 +32,25 @@ import Settings from "./components/Settings";
 const App = () => {
   const settingSnapshot = useSnapshot(settingStore);
 
+  const menuMemo = useMemo(() => <Menu />, []);
+  const settingsMemo = useMemo(() => <Settings />, []);
+
   return (
     <div className="relative box-border flex bg-[#f6f6f6]">
-      <div className="sticky top-0 left-0">
-        <Menu />
-      </div>
-      {settingSnapshot.open && (
-        <div className="flex justify-center my-5 z-50">
-          <Settings />
-        </div>
-      )}
+      <div className="sticky top-0 left-0">{menuMemo}</div>
+      <AnimatePresence>
+        {settingSnapshot.open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 flex justify-center h-screen pt-24 pb-10"
+          >
+            {settingsMemo}
+          </motion.div>
+        )}
+      </AnimatePresence>
       <Outlet />
     </div>
   );

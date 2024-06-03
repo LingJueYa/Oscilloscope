@@ -1,4 +1,3 @@
 {
-  "webSocketUrl": "ws://localhost:8080/view/ws",
-  "license": "0002-n6m7qpJbHJrjdKg3bdmg3TN3F3XAKwCou5OGQxuf92yvMrVheNja4z8Aqpu0C4xWMkxozm04ykIY2MsVaMj+aY2P-MEQCIE6g4qI20CFmC5rPoQ1x9TqrgAvYvduIKGjuqjFjWyfFAiBclNV6oHAmxlbtHuP3aRHL0zd6t7kO7NxpKCKJrNJFUQ=="
+  "webSocketUrl": "ws://localhost:8080/view/ws"
 }

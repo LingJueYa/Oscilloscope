@@ -32,17 +32,14 @@ export default function Settings() {
   );
 
   const stopPropagation = useCallback((e) => e.stopPropagation(), []);
-  const handleButtonClick = useCallback(
-    () => settingSnapshot.isOpen(),
-    [settingSnapshot.isOpen]
-  );
+  const handleButtonClick = useCallback(() => settingSnapshot.isOpen(), []);
 
   return (
     <div className={`text-xl ${containerClass}`} onClick={stopPropagation}>
-      <div className="flex flex-col max-w-[800px] sm:min-w-[500px] h-fit mx-4 sm:mx-0 py-8 px-6 bg-white rounded-xl">
-        <div className="flex justify-between mb-4">
-          <div className="pl-2 text-xl font-bold text-[#ff7c7c]">
-            {t("settings")}
+      <div className="flex flex-col max-w-[800px] sm:min-w-[500px] h-fit mx-4 sm:mx-0 py-6 px-6 bg-white rounded-xl shadow-lg">
+        <div className="flex justify-between mb-8">
+          <div className="text-xl font-bold text-[#ff7c7c]">
+            {t("settings.settings")}
           </div>
           <button
             className="btn btn-square btn-outline btn-sm text-black hover:bg-[#ff7c7c] hover:border-[#ff7c7c] hover:text-white"
@@ -64,8 +61,15 @@ export default function Settings() {
             </svg>
           </button>
         </div>
-        <div className="flex flex-col gap-4">
-          <span>{t("language_setting")}</span>
+        <div className="flex items-center gap-20">
+          <div className="flex flex-col gap-2">
+            <span className="text-black text-xl">
+              {t("settings.language_setting")}
+            </span>
+            <span className="text-gray-500 text-sm">
+              {t("settings.language_description")}
+            </span>
+          </div>
           <LangSwitcher />
         </div>
       </div>
