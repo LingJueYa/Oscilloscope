@@ -37,6 +37,8 @@ const zh = {
     fileSize: "文件大小",
     download: "下载",
     delete: "删除",
+    analytic_waveform: "解析波形",
+    looking_to_parse: " 是否在寻找解析下载到的波形文件？",
   },
   document: {
     title: "国产示波器文档支持",

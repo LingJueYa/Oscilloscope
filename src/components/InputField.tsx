@@ -1,6 +1,11 @@
 {
   /*输入框组件*/
 }
+
+{
+  /*导入 React */
+}
+import React, { ChangeEvent } from "react";
 {
   /*导入 第三方库 */
 }
@@ -10,7 +15,17 @@ import {
 } from "@ant-design/icons";
 import { Tag } from "antd";
 
-const InputField = ({
+interface InputFieldProps {
+  id: string;
+  name: string;
+  placeholder: string;
+  required: boolean;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  verify: string;
+}
+
+const InputField: React.FC<InputFieldProps> = ({
   id,
   name,
   placeholder,

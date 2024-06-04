@@ -5,7 +5,7 @@
 {
   /*导入React */
 }
-import React, { useRef, useMemo } from "react";
+import React, { useRef, useMemo, useCallback } from "react";
 {
   /*导入第三方库 */
 }
@@ -54,11 +54,11 @@ const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
   {
     /*截图函数 */
   }
-  const handleDownload = () => {
+  const handleDownload = useCallback(() => {
     if (chartContainerRef.current) {
       downloadScreenshot(chartContainerRef.current, "chart-screenshot.png");
     }
-  };
+  }, []);
 
   return (
     <div className="relative w-full h-full">
@@ -75,4 +75,4 @@ const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
     </div>
   );
 };
-export default React.memo(OscilloscopeChart);
+export default OscilloscopeChart;

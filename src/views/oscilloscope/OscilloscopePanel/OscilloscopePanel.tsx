@@ -5,117 +5,33 @@
 {
   /*导入React */
 }
-import React, { useEffect, useCallback, useMemo } from "react";
+import React from "react";
 {
   /*导入第三方库 */
 }
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Radio, InputNumber, Input, message, Button } from "antd";
-import { useWebSocket } from "ahooks";
+import { Radio, InputNumber, Button } from "antd";
+{
+  /*导入自定义 hooks */
+}
+import useWebSocketHandler from "../../../hooks/useWebSocketHandler";
+import useSampleRateHandler from "../../../hooks/useSampleRateHandler";
+import useSampleStepHandler from "../../../hooks/useSampleStepHandler";
+import useTriggerModeHandler from "../../../hooks/useTriggerModeHandler";
 {
   /*导入 全局 状态管理 */
 }
 import { useSnapshot } from "valtio";
-import { osChange } from "../../../store/os";
-import { chartStore } from "../../../store/charts";
+import { osChangeStore } from "../../../store/os";
 import { saveStore } from "../../../store/save";
-{
-  /*导入数据 */
-}
-import setting from "../../../../public/json/setting.json";
 {
   /*导入组件 */
 }
 import SaveWave from "../../../components/SaveWave";
 
-{
-  /*创建 ws状态 */
-}
-const connectionStatusMap = {
-  0: "正在连接",
-  1: "已连接",
-  2: "正在关闭",
-  3: "已关闭",
-};
-
-{
-  /*WebSocket */
-}
-const useWebSocketHandler = () => {
-  const { readyState, sendMessage, latestMessage, disconnect, connect } =
-    useWebSocket(`${setting.webSocketUrl}`);
-
-  useEffect(() => {
-    const connectionStatus = connectionStatusMap[readyState];
-    if (connectionStatus) {
-      message.success(`WebSocket${connectionStatus}`, 3);
-    }
-  }, [readyState]);
-  {
-    /*心跳响应 */
-  }
-  useEffect(() => {
-    if (latestMessage) {
-      try {
-        const data = JSON.parse(latestMessage.data).message;
-        chartStore.chartData = data;
-        if (data.type === "ping") {
-          sendMessage(JSON.stringify({ type: "pong" }));
-          console.log("Received ping, sent pong.");
-        } else {
-          console.log("Received message:", latestMessage.data);
-        }
-      } catch (error) {
-        console.error("Error parsing message:", error);
-      }
-    }
-  }, [latestMessage, sendMessage]);
-
-  return { readyState, sendMessage, disconnect, connect };
-};
-
-{
-  /*采样频率提交函数 */
-}
-const useSampleRateHandler = (sendMessage) => {
-  return useCallback(
-    (value) => {
-      osChange.sampleRateChange = value;
-      sendMessage && sendMessage(`${value}`);
-    },
-    [sendMessage]
-  );
-};
-
-{
-  /*取样间隔提交函数 */
-}
-const useSampleStepHandler = (sendMessage) => {
-  return useCallback(
-    (value) => {
-      osChange.sampleStepChange = value;
-      sendMessage && sendMessage(`${value}`);
-    },
-    [sendMessage]
-  );
-};
-
-{
-  /*触发方式提交函数 */
-}
-const useTriggerModeHandler = (sendMessage) => {
-  return useCallback(
-    (e) => {
-      osChange.triggerModeChange = e.target.value;
-      sendMessage && sendMessage(`${e.target.value}`);
-    },
-    [sendMessage]
-  );
-};
-
-export default function OscilloscopePanel() {
-  const osChangeSnapshot = useSnapshot(osChange);
+const OscilloscopePanel: React.FC = () => {
+  const osChangeSnapshot = useSnapshot(osChangeStore);
   const saveSnapshot = useSnapshot(saveStore);
   const { t } = useTranslation();
   const { readyState, sendMessage, disconnect, connect } =
@@ -124,8 +40,6 @@ export default function OscilloscopePanel() {
   const handleSampleRateChange = useSampleRateHandler(sendMessage);
   const handleSampleStepChange = useSampleStepHandler(sendMessage);
   const handleTriggerModeChange = useTriggerModeHandler(sendMessage);
-
-  const saveWaveMemo = useMemo(() => <SaveWave />, []);
 
   return (
     <div className="flex flex-col h-full">
@@ -138,7 +52,7 @@ export default function OscilloscopePanel() {
             transition={{ duration: 0.5 }}
             className="fixed inset-0 z-50 flex justify-center h-screen pt-24 pb-10"
           >
-            {saveWaveMemo}
+            <SaveWave />
           </motion.div>
         )}
       </AnimatePresence>
@@ -204,4 +118,6 @@ export default function OscilloscopePanel() {
       </div>
     </div>
   );
-}
+};
+
+export default OscilloscopePanel;

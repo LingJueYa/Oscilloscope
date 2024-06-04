@@ -3,7 +3,12 @@
 }
 import { proxy } from "valtio";
 
-export const isOpenMenuState = proxy({
+interface IsOpenMenuState {
+  fold: boolean;
+  isOpen: () => void;
+}
+
+export const isOpenMenuState = proxy<IsOpenMenuState>({
   fold: true,
   isOpen: () => {
     isOpenMenuState.fold = !isOpenMenuState.fold;

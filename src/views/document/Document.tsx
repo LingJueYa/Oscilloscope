@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 }
 import Article from "../../components/Article";
 
-export default function Document() {
+const Document: React.FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -26,4 +26,6 @@ export default function Document() {
       <Article />
     </div>
   );
-}
+};
+
+export default Document;

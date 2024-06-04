@@ -3,7 +3,13 @@
 }
 import { proxy } from "valtio";
 
-export const osChange = proxy({
+interface OsChangeStore {
+  sampleRateChange: number;
+  sampleStepChange: number;
+  triggerModeChange: string;
+}
+
+export const osChangeStore = proxy<OsChangeStore>({
   sampleRateChange: 10000,
   sampleStepChange: 1,
   triggerModeChange: "3",

@@ -3,7 +3,12 @@
 }
 import { proxy } from "valtio";
 
-export const i18nStore = proxy({
+interface I18nStore {
+  language: string;
+  ChangeLang: (lang: string) => void;
+}
+
+export const i18nStore = proxy<I18nStore>({
   language: "zh",
   ChangeLang(lang: string) {
     i18nStore.language = lang;

@@ -16,7 +16,7 @@ import { Steps } from "antd";
 import { useSnapshot } from "valtio";
 import { analysisStore } from "../store/analysis";
 
-const AnalysisStep = () => {
+const AnalysisStep: React.FC = () => {
   const analysisSnapshot = useSnapshot(analysisStore);
 
   const steps = useMemo(
@@ -31,4 +31,4 @@ const AnalysisStep = () => {
   return <Steps current={analysisSnapshot.current} items={steps} />;
 };
 
-export default React.memo(AnalysisStep);
+export default AnalysisStep;

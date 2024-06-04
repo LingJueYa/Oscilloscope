@@ -3,7 +3,12 @@
 }
 import { proxy } from "valtio";
 
-export const mediaQueryStore = proxy({
+interface MediaQueryStore {
+  isMobile: boolean;
+  isPortrait: boolean;
+}
+
+export const mediaQueryStore = proxy<MediaQueryStore>({
   isMobile: false,
   isPortrait: true,
 });

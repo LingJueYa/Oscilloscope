@@ -20,7 +20,7 @@ import { saveStore } from "../store/save";
 }
 import InputField from "./InputField";
 
-export default function SaveWave() {
+const SaveWave: React.FC = () => {
   const { t } = useTranslation();
   const saveSnapshot = useSnapshot(saveStore);
 
@@ -96,4 +96,6 @@ export default function SaveWave() {
       </div>
     </div>
   );
-}
+};
+
+export default SaveWave;

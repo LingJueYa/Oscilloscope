@@ -7,7 +7,17 @@ import { proxy } from "valtio";
 }
 import { message } from "antd";
 
-export const saveStore = proxy({
+interface SaveStore {
+  open: boolean;
+  isOpen: () => void;
+  wavename: string;
+  uploadTime: string;
+  isLoading: boolean;
+  error: string | null;
+  savewave: () => Promise<void>;
+}
+
+export const saveStore = proxy<SaveStore>({
   open: false,
   isOpen: () => {
     saveStore.open = !saveStore.open;

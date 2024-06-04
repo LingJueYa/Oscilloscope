@@ -70,10 +70,10 @@ const History: React.FC = () => {
                 to="/analysis"
                 className="px-4 py-2 text-base text-sky-500 tracking-wider border border-sky-500 rounded-md  transition-all duration-300 ease-in-out hover:bg-sky-500 hover:text-white "
               >
-                解析波形
+                {t("history.analytic_waveform")}
               </Link>
               <span className="mt-1 text-sm text-zinc-500">
-                是否在寻找解析下载到的波形文件？
+                {t("looking_to_parse")}
               </span>
             </div>
           </div>
@@ -108,4 +108,4 @@ const History: React.FC = () => {
     </div>
   );
 };
-export default React.memo(History);
+export default History;

@@ -37,6 +37,8 @@ const en = {
     fileSize: "File Size",
     download: "Download",
     delete: "Delete",
+    analytic_waveform: "Analytic waveform",
+    looking_to_parse: "Looking to parse the downloaded waveform file",
   },
   document: {
     title: "国产示波器文档支持",

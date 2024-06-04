@@ -113,4 +113,4 @@ const Menus: React.FC = () => {
     </Affix>
   );
 };
-export default React.memo(Menus);
+export default Menus;

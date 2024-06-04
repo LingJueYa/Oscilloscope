@@ -15,8 +15,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useSnapshot } from "valtio";
 import { mediaQueryStore } from "../store/mediaquery";
 
-const MediaQueryHandler = ({ children }) => {
-  const midiaQuerySnapshot = useSnapshot(mediaQueryStore);
+interface MediaQueryHandlerProps {
+  children: React.ReactNode;
+}
+
+const MediaQueryHandler: React.FC<MediaQueryHandlerProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -58,7 +61,7 @@ const MediaQueryHandler = ({ children }) => {
       {mediaQueryStore.isMobile && mediaQueryStore.isPortrait && (
         <div className="fixed top-0 left-0 flex justify-center items-center w-full h-full bg-white/60 backdrop-blur-md z-50">
           <span
-            className="text-black absolute z-50" // 使用绝对定位并设置一个高的z-index值
+            className="text-black absolute z-50"
             style={{
               left: "50%",
               top: "50%",

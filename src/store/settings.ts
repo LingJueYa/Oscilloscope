@@ -2,7 +2,13 @@
   /*设置页面的状态管理 */
 }
 import { proxy } from "valtio";
-export const settingStore = proxy({
+
+interface SettingStore {
+  open: boolean;
+  isOpen: () => void;
+}
+
+export const settingStore = proxy<SettingStore>({
   open: false,
   isOpen: () => {
     settingStore.open = !settingStore.open;

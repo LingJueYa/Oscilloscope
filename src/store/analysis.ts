@@ -7,7 +7,21 @@ const description1 = "上传波形文件";
 const description2 = "正在分析波形";
 const description3 = "渲染图表";
 
-export const analysisStore = proxy({
+interface AnalysisStore {
+  open: boolean;
+  isOpen: () => void;
+  current: number;
+  analysisStep: {
+    title: string;
+    description: string;
+  }[];
+  readonly chartData: readonly {
+    readonly x: string;
+    readonly y: number;
+  }[];
+}
+
+export const analysisStore = proxy<AnalysisStore>({
   open: false,
   isOpen: () => {
     analysisStore.open = !analysisStore.open;

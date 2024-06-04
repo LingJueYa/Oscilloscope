@@ -3,7 +3,14 @@
 }
 import { proxy } from "valtio";
 
-export const historyStore = proxy({
+interface HistoryStore {
+  history: any[];
+  error: string | null;
+  isLoading: boolean;
+  getHistory: () => Promise<void>;
+}
+
+export const historyStore = proxy<HistoryStore>({
   history: [],
   error: null,
   isLoading: false,

@@ -20,7 +20,7 @@ import { settingStore } from "../store/settings";
 }
 import LangSwitcher from "./LangSwitcher";
 
-export default function Settings() {
+const Settings: React.FC = () => {
   const settingSnapshot = useSnapshot(settingStore);
   const { t } = useTranslation();
   const containerClass = useMemo(
@@ -75,4 +75,5 @@ export default function Settings() {
       </div>
     </div>
   );
-}
+};
+export default Settings;

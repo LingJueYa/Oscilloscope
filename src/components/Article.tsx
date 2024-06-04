@@ -21,7 +21,7 @@ import "../styles/article.css";
 }
 import Notfound from "../views/notFound/Notfound";
 
-const Article = () => {
+const Article: React.FC = () => {
   {
     /*解析地址对应的 md 文件 */
   }
@@ -37,24 +37,17 @@ const Article = () => {
       .catch((error) => console.error("Error fetching Markdown:", error));
   }, []);
 
-  const renderContent = useMemo(() => {
-    if (!mdContent.length) {
-      return <Notfound />;
-    }
-    return (
-      <div className="article p-5 text-black break-all leading-relaxed tracking-wider">
-        <ReactMarkdown
-          remarkPlugins={[gfm]}
-          rehypePlugins={[rehypeRaw]}
-          children={mdContent}
-        />
-      </div>
-    );
-  }, [mdContent]);
-
   return (
     <div className="w-full h-fit bg-white pb-10 overflow-hidden">
-      {renderContent}
+      {mdContent.length ? (
+        <div className="article p-5 text-black break-all leading-relaxed tracking-wider">
+          <ReactMarkdown remarkPlugins={[gfm]} rehypePlugins={[rehypeRaw]}>
+            {mdContent}
+          </ReactMarkdown>
+        </div>
+      ) : (
+        <Notfound />
+      )}
     </div>
   );
 };

@@ -3,7 +3,11 @@
 }
 import { proxy } from "valtio";
 
-export const chartStore = proxy({
+interface ChartStore {
+  chartData: { x: string | number; y: string | number }[];
+}
+
+export const chartStore = proxy<ChartStore>({
   chartData: [
     { x: "1", y: 1 },
     { x: "2", y: 1 },

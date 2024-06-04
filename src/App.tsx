@@ -30,17 +30,16 @@ import Menu from "./views/menus/Menus";
 }
 import Settings from "./components/Settings";
 
-const App = () => {
+const App: React.FC = () => {
   const settingSnapshot = useSnapshot(settingStore);
   const mediaQuerySnapshot = useSnapshot(mediaQueryStore);
-
-  const menuMemo = useMemo(() => <Menu />, []);
-  const settingsMemo = useMemo(() => <Settings />, []);
 
   return (
     <div className="relative box-border flex bg-[#f6f6f6]">
       {!mediaQuerySnapshot.isMobile && (
-        <div className="sticky top-0 left-0">{menuMemo}</div>
+        <div className="sticky top-0 left-0">
+          <Menu />
+        </div>
       )}
       <AnimatePresence>
         {settingSnapshot.open && (
@@ -48,10 +47,10 @@ const App = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
             className="fixed inset-0 z-50 flex justify-center h-screen pt-24 pb-10"
           >
-            {settingsMemo}
+            <Settings />
           </motion.div>
         )}
       </AnimatePresence>

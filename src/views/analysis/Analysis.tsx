@@ -22,19 +22,19 @@ import { analysisStore } from "../../store/analysis";
 }
 import AnalysisStep from "../../components/AnalysisStep";
 import OscilloscopeChart from "../oscilloscope/OscilloscopeChart/OscilloscopeChart";
-import SupportedFileTypes from "../../components/SupportedFileTypes";
+import SupportedFileTypes from "../../components/SupportedFileType/SupportedFileTypes";
 
 const { Dragger } = Upload;
 
-export default function Analysis() {
+const Analysis: React.FC = () => {
   const { t } = useTranslation();
   const analysisSnapshot = useSnapshot(analysisStore);
 
-  const props = useMemo(
+  const uploadProps = useMemo(
     () => ({
       name: "file",
       multiple: true,
-      action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
+      action: "https://xxxx/upload",
       onChange(info) {
         const { status } = info.file;
         if (status !== "uploading") {
@@ -63,7 +63,7 @@ export default function Analysis() {
         {t("menus.analysis")}
       </span>
       <div className="mt-10 h-[400px] rounded-2xl">
-        <Dragger {...props}>
+        <Dragger {...uploadProps}>
           <p className="ant-upload-drag-icon">
             <InboxOutlined />
           </p>
@@ -90,4 +90,6 @@ export default function Analysis() {
       </div>
     </div>
   );
-}
+};
+
+export default Analysis;

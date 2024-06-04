@@ -17,7 +17,7 @@ import { Radio } from "antd";
 import { useSnapshot } from "valtio";
 import { i18nStore } from "../store/i18n";
 
-const LangSwitcher = () => {
+const LangSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
 
   const i18nSnapshot = useSnapshot(i18nStore);
