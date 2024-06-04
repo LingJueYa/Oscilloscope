@@ -20,6 +20,7 @@ import "./styles/index.css";
 }
 import { useSnapshot } from "valtio";
 import { settingStore } from "./store/settings";
+import { mediaQueryStore } from "./store/mediaquery";
 {
   /*导入 菜单 组件 */
 }
@@ -31,13 +32,16 @@ import Settings from "./components/Settings";
 
 const App = () => {
   const settingSnapshot = useSnapshot(settingStore);
+  const mediaQuerySnapshot = useSnapshot(mediaQueryStore);
 
   const menuMemo = useMemo(() => <Menu />, []);
   const settingsMemo = useMemo(() => <Settings />, []);
 
   return (
     <div className="relative box-border flex bg-[#f6f6f6]">
-      <div className="sticky top-0 left-0">{menuMemo}</div>
+      {!mediaQuerySnapshot.isMobile && (
+        <div className="sticky top-0 left-0">{menuMemo}</div>
+      )}
       <AnimatePresence>
         {settingSnapshot.open && (
           <motion.div

@@ -13,6 +13,9 @@ const en = {
     falling_edge: "Falling Edge",
     trigger_mode: "Trigger Mode",
   },
+  oschart: {
+    export_picture: "Export picture",
+  },
   notfound: {
     notFound: "Sorry, the page you visited does not exist.",
     backHome: "Back Home",

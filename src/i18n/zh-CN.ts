@@ -13,6 +13,9 @@ const zh = {
     falling_edge: "下降沿",
     trigger_mode: "触发方式",
   },
+  oschart: {
+    export_picture: "导出为图片",
+  },
   notfound: {
     notFound: "对不起，您访问的页面不存在。",
     backHome: "回到主页",

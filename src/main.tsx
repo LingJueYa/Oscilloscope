@@ -15,6 +15,10 @@ import Router from "./config/router";
 }
 import ScrollToTop from "./components/ScrollToTop";
 {
+  /*导入媒体查询 */
+}
+import MediaQueryHandler from "./components/MediaQueryHandler";
+{
   /*导入 i18n 支持 */
 }
 import "./config/i18n";
@@ -35,13 +39,17 @@ if (rootElement) {
     mode === "hash" ? (
       <HashRouter>
         <ScrollToTop>
-          <Router />
+          <MediaQueryHandler>
+            <Router />
+          </MediaQueryHandler>
         </ScrollToTop>
       </HashRouter>
     ) : (
       <BrowserRouter>
         <ScrollToTop>
-          <Router />
+          <MediaQueryHandler>
+            <Router />
+          </MediaQueryHandler>
         </ScrollToTop>
       </BrowserRouter>
     )

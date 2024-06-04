@@ -142,7 +142,7 @@ export default function OscilloscopePanel() {
           </motion.div>
         )}
       </AnimatePresence>
-      <span className="mb-6 text-2xl text-black font-bold">
+      <span className="mb-6 text-xl lg:text-2xl text-black font-bold">
         {t("ospanel.oscilloscope_panel")}
       </span>
       <div className="flex items-center gap-4 mb-4">
@@ -162,7 +162,7 @@ export default function OscilloscopePanel() {
           </Button>
         </div>
       </div>
-      <div className="flex items-center">
+      <div className="flex flex-col lg:flex-row lg:items-center">
         <div className="mb-4 mr-6">
           <span className="mr-3 text-black">
             {t("ospanel.sample_frequency")}
