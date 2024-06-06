@@ -51,7 +51,8 @@ const en = {
   },
   analysis: {
     click_or_drag: "Click or drag file to this area to upload",
-    upload_csv_files: "You can upload CSV files downloaded from this website",
+    upload_csv_files:
+      "You can upload CSV or Bin files downloaded from this website",
     supported_file_types: "Supported file types",
     if_you_already_have_a_file_in_the_following_format:
       "If you already have a file in the following format, please upload it to use",

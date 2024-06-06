@@ -10,5 +10,5 @@ interface MediaQueryStore {
 
 export const mediaQueryStore = proxy<MediaQueryStore>({
   isMobile: false,
-  isPortrait: true,
+  isPortrait: false,
 });

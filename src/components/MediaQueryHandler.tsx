@@ -4,7 +4,7 @@
 {
   /*导入 React */
 }
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 {
   /*导入第三方组件 */
 }
@@ -22,6 +22,7 @@ interface MediaQueryHandlerProps {
 const MediaQueryHandler: React.FC<MediaQueryHandlerProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const mediaQuerySnapshot = useSnapshot(mediaQueryStore);
 
   useEffect(() => {
     const handleResize = () => {
@@ -58,7 +59,7 @@ const MediaQueryHandler: React.FC<MediaQueryHandlerProps> = ({ children }) => {
 
   return (
     <>
-      {mediaQueryStore.isMobile && mediaQueryStore.isPortrait && (
+      {mediaQuerySnapshot.isMobile && mediaQuerySnapshot.isPortrait && (
         <div className="fixed top-0 left-0 flex justify-center items-center w-full h-full bg-white/60 backdrop-blur-md z-50">
           <span
             className="text-black absolute z-50"

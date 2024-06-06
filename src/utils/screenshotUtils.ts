@@ -3,6 +3,9 @@
 }
 import domtoimage from "dom-to-image";
 
+{
+  /*下载图片 */
+}
 export const downloadScreenshot = (element, filename = "screenshot.png") => {
   if (element) {
     domtoimage

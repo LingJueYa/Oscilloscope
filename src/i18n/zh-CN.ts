@@ -51,7 +51,7 @@ const zh = {
   },
   analysis: {
     click_or_drag: "单击或拖动文件到此区域进行上传",
-    upload_csv_files: "支持上传从本网站下载的 .CSV 格式文件",
+    upload_csv_files: "支持上传从本网站下载的 .CSV 或 .Bin 格式文件",
     supported_file_types: "已支持的文件格式",
     if_you_already_have_a_file_in_the_following_format:
       "如果您已经有了以下格式的文件，请上传使用",

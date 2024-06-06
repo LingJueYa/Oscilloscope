@@ -23,7 +23,7 @@ const Oscilloscope: React.FC = () => {
   const chartSnapshot = useSnapshot(chartStore);
 
   return (
-    <div className="h-screen w-full bg-white">
+    <div className="h-fit w-full bg-white">
       <div className="flex flex-col w-full h-full px-10">
         <div className="flex flex-col w-full h-screen mt-6">
           <div className="h-1/4">

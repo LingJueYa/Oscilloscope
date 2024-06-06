@@ -16,16 +16,18 @@ import {
 import { Tag } from "antd";
 
 interface InputFieldProps {
-  id: string;
-  name: string;
+  className: string;
+  id?: string;
+  name?: string;
   placeholder: string;
-  required: boolean;
+  required?: boolean;
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  verify: string;
+  verify?: string;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
+  className,
   id,
   name,
   placeholder,
@@ -37,7 +39,7 @@ const InputField: React.FC<InputFieldProps> = ({
   <div className="relative">
     <input
       type="text"
-      className="mt-6 py-3 px-6 w-full h-[30px] sm:h-[40px] lg:h-[50px] border border-[#d6d6d6] bg-white text-black text-base rounded-lg transition duration-500 ease-in-out hover:border-[#ff7c7c]"
+      className={className}
       id={id}
       name={name}
       placeholder={placeholder}

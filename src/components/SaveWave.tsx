@@ -78,6 +78,7 @@ const SaveWave: React.FC = () => {
           onSubmit={handleFormSubmit}
         >
           <InputField
+            className="mt-6 py-3 px-6 w-full h-[30px] sm:h-[40px] lg:h-[50px] border border-[#d6d6d6] bg-white text-black text-base rounded-lg transition duration-500 ease-in-out hover:border-[#ff7c7c]"
             id="wavename"
             name="wavename"
             placeholder={t("savewave.give_the_waveform_a_name")}

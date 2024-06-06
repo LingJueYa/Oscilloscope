@@ -2,10 +2,6 @@
   /*示波器顶级组件 */
 }
 {
-  /*导入 React */
-}
-import { useMemo, useCallback } from "react";
-{
   /*导入第三方库 */
 }
 import { Outlet } from "react-router-dom";

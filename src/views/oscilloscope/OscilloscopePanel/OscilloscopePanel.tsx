@@ -5,7 +5,7 @@
 {
   /*导入React */
 }
-import React from "react";
+import React, { useEffect } from "react";
 {
   /*导入第三方库 */
 }
@@ -25,34 +25,62 @@ import useTriggerModeHandler from "../../../hooks/useTriggerModeHandler";
 import { useSnapshot } from "valtio";
 import { osChangeStore } from "../../../store/os";
 import { saveStore } from "../../../store/save";
+import { wsStore } from "../../../store/ws";
 {
   /*导入组件 */
 }
-import SaveWave from "../../../components/SaveWave";
+import WaveformManager from "../../../components/WaveformManager";
 
 const OscilloscopePanel: React.FC = () => {
   const osChangeSnapshot = useSnapshot(osChangeStore);
   const saveSnapshot = useSnapshot(saveStore);
+  const wsSnapshot = useSnapshot(wsStore);
   const { t } = useTranslation();
-  const { readyState, sendMessage, disconnect, connect } =
-    useWebSocketHandler();
+  const {
+    readyState,
+    sendMessage,
+    connect,
+    disconnect,
+    startReceiving,
+    stopReceiving,
+  } = useWebSocketHandler();
 
   const handleSampleRateChange = useSampleRateHandler(sendMessage);
   const handleSampleStepChange = useSampleStepHandler(sendMessage);
   const handleTriggerModeChange = useTriggerModeHandler(sendMessage);
 
+  {
+    /*停止按钮函数（打开保存对话框，停止接收数据） */
+  }
+  const handleStop = () => {
+    stopReceiving();
+    saveStore.isOpen();
+  };
+  {
+    /*如果点击保存对话框关闭，则停止连接并关闭对话框 */
+  }
+  useEffect(() => {
+    if (wsSnapshot.isDisconnect) {
+      disconnect();
+      {
+        /*将状态重新设置为false，确保下次可以激活 */
+      }
+      wsStore.isDisconnect = false;
+    }
+  }, [wsSnapshot.isDisconnect]);
+
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-white">
       <AnimatePresence>
         {saveSnapshot.open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-50 flex justify-center h-screen pt-24 pb-10"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex justify-center pt-16 pb-10"
           >
-            <SaveWave />
+            <WaveformManager />
           </motion.div>
         )}
       </AnimatePresence>
@@ -60,21 +88,19 @@ const OscilloscopePanel: React.FC = () => {
         {t("ospanel.oscilloscope_panel")}
       </span>
       <div className="flex items-center gap-4 mb-4">
-        <Button type="primary" onClick={connect} disabled={readyState === 1}>
+        <Button
+          type="primary"
+          onClick={() => {
+            connect();
+            startReceiving();
+          }}
+          disabled={readyState === 1}
+        >
           {t("ospanel.run")}
         </Button>
-        <Button onClick={disconnect} disabled={readyState === 3}>
+        <Button onClick={handleStop} disabled={readyState === 3}>
           {t("ospanel.stop")}
         </Button>
-        <div className="flex items-center">
-          <Button
-            type="primary"
-            onClick={saveSnapshot.isOpen}
-            disabled={readyState === 3}
-          >
-            {t("ospanel.save_current_waveform")}
-          </Button>
-        </div>
       </div>
       <div className="flex flex-col lg:flex-row lg:items-center">
         <div className="mb-4 mr-6">

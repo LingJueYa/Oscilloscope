@@ -1,8 +1,4 @@
 {
-  /*WebSocket Hooks */
-}
-
-{
   /*导入 React */
 }
 import { useEffect } from "react";
@@ -14,7 +10,9 @@ import { message } from "antd";
 {
   /*导入全局状态管理 */
 }
+import { useSnapshot } from "valtio";
 import { chartStore } from "../store/charts";
+import { wsStore } from "../store/ws";
 {
   /*导入数据 */
 }
@@ -31,36 +29,65 @@ const connectionStatusMap = {
 };
 
 const useWebSocketHandler = () => {
+  const wsSnapshot = useSnapshot(wsStore);
   const { readyState, sendMessage, latestMessage, disconnect, connect } =
-    useWebSocket(`${setting.webSocketUrl}`);
+    useWebSocket(`${setting.webSocketUrl}`, {
+      reconnectLimit: 0, // 禁止自动重连
+      reconnectInterval: 0, // 禁止自动重连
+    });
 
   useEffect(() => {
     const connectionStatus = connectionStatusMap[readyState];
-    if (connectionStatus) {
+    console.log(`WebSocket connection status: ${connectionStatus}`);
+    if (connectionStatus == "已连接") {
       message.success(`WebSocket${connectionStatus}`, 3);
     }
+    if (connectionStatus == "已关闭") {
+      message.warning(`WebSocket${connectionStatus}`, 3);
+    }
   }, [readyState]);
+
   {
     /*心跳响应 */
   }
   useEffect(() => {
-    if (latestMessage) {
+    if (readyState == 1 && latestMessage) {
       try {
-        const data = JSON.parse(latestMessage.data).message;
-        chartStore.chartData = data;
+        const parsedMessage = JSON.parse(latestMessage.data);
+        const data = parsedMessage.data.body;
+
         if (data.type === "ping") {
           sendMessage(JSON.stringify({ type: "pong" }));
           console.log("Received ping, sent pong.");
-        } else {
-          console.log("Received message:", latestMessage.data);
+        }
+
+        if (wsSnapshot.receive) {
+          if (Array.isArray(data)) {
+            chartStore.chartData = data;
+          }
         }
       } catch (error) {
         console.error("Error parsing message:", error);
       }
     }
-  }, [latestMessage, sendMessage]);
+  }, [latestMessage, sendMessage, wsSnapshot.receive]);
 
-  return { readyState, sendMessage, disconnect, connect };
+  const stopReceiving = () => {
+    wsStore.receive = false;
+  };
+
+  const startReceiving = () => {
+    wsStore.receive = true;
+  };
+
+  return {
+    readyState,
+    sendMessage,
+    disconnect,
+    connect,
+    stopReceiving,
+    startReceiving,
+  };
 };
 
 export default useWebSocketHandler;

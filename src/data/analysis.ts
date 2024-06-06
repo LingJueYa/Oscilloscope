@@ -2,6 +2,7 @@
   /*分析波形信息 */
 }
 import csvIcon from "../assets/svg/csv.svg";
+import binIcon from "../assets/svg/bin.svg";
 
 const analysis: AnalysisConfig = {
   support: [
@@ -12,8 +13,8 @@ const analysis: AnalysisConfig = {
     },
     {
       id: 2,
-      icon: "/",
-      title: "待支持...",
+      icon: binIcon,
+      title: ".Bin",
     },
     {
       id: 3,

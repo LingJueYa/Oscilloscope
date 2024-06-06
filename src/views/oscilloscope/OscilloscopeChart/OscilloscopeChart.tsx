@@ -15,20 +15,22 @@ import { useTranslation } from "react-i18next";
   /*导入工具函数 */
 }
 import { downloadScreenshot } from "../../../utils/screenshotUtils";
+import useWaveAsBase from "../../../hooks/useWaveAsBaseHandler";
 
 interface OscilloscopeChartProps {
   rawData: {
     readonly chartData: readonly {
-      readonly x: string;
+      readonly x: number;
       readonly y: number;
     }[];
   };
 }
 
 const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
-  const chartContainerRef = useRef<HTMLDivElement>(null);
+  const waveformRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
   const data = rawData.chartData;
+  const { handleSaveCurrentWaveform } = useWaveAsBase(waveformRef);
   {
     /*图表配置 */
   }
@@ -55,8 +57,8 @@ const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
     /*截图函数 */
   }
   const handleDownload = useCallback(() => {
-    if (chartContainerRef.current) {
-      downloadScreenshot(chartContainerRef.current, "chart-screenshot.png");
+    if (waveformRef.current) {
+      downloadScreenshot(waveformRef.current, "chart-screenshot.png");
     }
   }, []);
 
@@ -69,7 +71,14 @@ const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
       >
         {t("oschart.export_picture")}
       </button>
-      <div ref={chartContainerRef}>
+      <button
+        type="button"
+        onClick={handleSaveCurrentWaveform}
+        className="absolute right-2 lg:static ml-4 p-2 rounded-lg bg-cyan-500/20 text-cyan-500 text-sm"
+      >
+        {t("ospanel.save_current_waveform")}
+      </button>
+      <div ref={waveformRef}>
         <Line {...config} data={data} xField="x" yField="y" />
       </div>
     </div>

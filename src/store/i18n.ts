@@ -9,7 +9,7 @@ interface I18nStore {
 }
 
 export const i18nStore = proxy<I18nStore>({
-  language: "zh",
+  language: "",
   ChangeLang(lang: string) {
     i18nStore.language = lang;
   },

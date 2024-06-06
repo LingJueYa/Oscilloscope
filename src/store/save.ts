@@ -14,7 +14,8 @@ interface SaveStore {
   uploadTime: string;
   isLoading: boolean;
   error: string | null;
-  savewave: () => Promise<void>;
+  saveTemporary: any;
+  autoPersist: boolean;
 }
 
 export const saveStore = proxy<SaveStore>({
@@ -26,29 +27,7 @@ export const saveStore = proxy<SaveStore>({
   uploadTime: "",
   isLoading: true,
   error: null,
-  savewave: async () => {
-    try {
-      saveStore.isLoading = true;
-      const response = await fetch("http://localhost:8080/view/save", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: saveStore.wavename,
-          uploadtime: saveStore.uploadTime,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      message.success("数据保存成功");
-      saveStore.wavename = "";
-    } catch (error) {
-      saveStore.error = error.message;
-      message.error("数据保存失败:" + error.message);
-    } finally {
-      saveStore.isLoading = false;
-    }
-  },
+  //临时保存的数据
+  saveTemporary: [],
+  autoPersist: false,
 });
