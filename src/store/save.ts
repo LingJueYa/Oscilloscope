@@ -15,7 +15,6 @@ interface SaveStore {
   isLoading: boolean;
   error: string | null;
   saveTemporary: any;
-  autoPersist: boolean;
 }
 
 export const saveStore = proxy<SaveStore>({
@@ -29,5 +28,4 @@ export const saveStore = proxy<SaveStore>({
   error: null,
   //临时保存的数据
   saveTemporary: [],
-  autoPersist: false,
 });

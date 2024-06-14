@@ -5,12 +5,13 @@
 {
   /*导入React */
 }
-import React, { useRef, useMemo, useCallback } from "react";
+import React, { useRef, useEffect, useMemo, useCallback } from "react";
 {
   /*导入第三方库 */
 }
-import { Line } from "@ant-design/charts";
 import { useTranslation } from "react-i18next";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 {
   /*导入工具函数 */
 }
@@ -29,29 +30,45 @@ interface OscilloscopeChartProps {
 const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
   const waveformRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
-  const data = rawData.chartData;
+  const data = useMemo(
+    () => rawData.chartData.map((point) => ({ ...point })),
+    [rawData.chartData]
+  );
   const { handleSaveCurrentWaveform } = useWaveAsBase(waveformRef);
   {
     /*图表配置 */
   }
-  const config = useMemo(
+  const chartOptions = useMemo(
     () => ({
-      // 选框
-      interaction: { brushFilter: true },
-      // 第一次进入动画
-      animate: { enter: { type: "fadeIn" }, update: { type: "morphing" } },
-      tooltip: {
-        items: [
-          { channel: "x", name: "Div", color: "red" },
-          { channel: "y", name: "电压" },
-        ],
+      chart: {
+        type: "line",
+        height: "550px",
       },
-      // 滑块范围栏
-      slider: {
-        x: {},
+      title: {
+        text: null,
       },
+      xAxis: {
+        title: {
+          text: "DIV",
+        },
+        gridLineWidth: 1,
+        gridLineColor: "#f0f0f0",
+      },
+      yAxis: {
+        title: {
+          text: "电压/v",
+        },
+        gridLineWidth: 1,
+        gridLineColor: "#f0f0f0",
+      },
+      series: [
+        {
+          name: "Waveform",
+          data: data,
+        },
+      ],
     }),
-    []
+    [data]
   );
   {
     /*截图函数 */
@@ -61,7 +78,18 @@ const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
       downloadScreenshot(waveformRef.current, "chart-screenshot.png");
     }
   }, []);
-
+  {
+    /*因为 high 图表组件没有自动监听，需要手动更新数据 */
+  }
+  useEffect(() => {
+    if (waveformRef.current) {
+      Highcharts.charts.forEach((chart) => {
+        if (chart) {
+          chart.series[0].setData(data, true);
+        }
+      });
+    }
+  }, [data]);
   return (
     <div className="relative w-full h-full">
       <button
@@ -78,8 +106,8 @@ const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
       >
         {t("ospanel.save_current_waveform")}
       </button>
-      <div ref={waveformRef}>
-        <Line {...config} data={data} xField="x" yField="y" />
+      <div ref={waveformRef} className="h-full mt-6">
+        <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       </div>
     </div>
   );

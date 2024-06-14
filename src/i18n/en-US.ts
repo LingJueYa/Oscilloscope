@@ -61,6 +61,13 @@ const en = {
     save_waveform: "The default file format is CSV (.csv).",
     give_the_waveform_a_name: "Give the Waveform a Name",
   },
+  autosave: {
+    save_all: "Save all",
+    discard_all: "Discard all",
+    auto_save: "Auto Save",
+    auto_save_description:
+      "When you do not select any waveform file,You can choose whether to save all or discard all",
+  },
 };
 
 export default en;

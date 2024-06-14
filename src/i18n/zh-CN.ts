@@ -60,6 +60,13 @@ const zh = {
     save_waveform: "保存波形数据",
     give_the_waveform_a_name: "请给这段波形起一个名字",
   },
+  autosave: {
+    save_all: "保存全部",
+    discard_all: "丢弃全部",
+    auto_save: "自动保存方式",
+    auto_save_description:
+      "当您没有选择任何波形文件的时候，您可以选择是是全部保存还是全部舍弃",
+  },
 };
 
 export default zh;

@@ -103,7 +103,7 @@ const OscilloscopePanel: React.FC = () => {
         </Button>
       </div>
       <div className="flex flex-col lg:flex-row lg:items-center">
-        <div className="mb-4 mr-6">
+        <div className="mb-4 mr-6 text-black">
           <span className="mr-3 text-black">
             {t("ospanel.sample_frequency")}
           </span>
@@ -117,7 +117,7 @@ const OscilloscopePanel: React.FC = () => {
           />
           /Hz
         </div>
-        <div className="mb-4  mr-6">
+        <div className="mb-4 mr-6 text-black">
           <span className="mr-3 text-black">
             {t("ospanel.sample_interval")}
           </span>

@@ -30,7 +30,9 @@ const Oscilloscope: React.FC = () => {
             <OscilloscopePanel />
           </div>
           <div className="h-3/4 mt-40 lg:h-5/6 lg:mt-0">
-            <OscilloscopeChart rawData={chartSnapshot} />
+            <OscilloscopeChart
+              rawData={{ chartData: chartSnapshot.chartData }}
+            />
           </div>
         </div>
       </div>

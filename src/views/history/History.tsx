@@ -73,7 +73,7 @@ const History: React.FC = () => {
                 {t("history.analytic_waveform")}
               </Link>
               <span className="mt-1 text-sm text-zinc-500">
-                {t("looking_to_parse")}
+                {t("history.looking_to_parse")}
               </span>
             </div>
           </div>

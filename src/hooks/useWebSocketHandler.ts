@@ -16,7 +16,7 @@ import { wsStore } from "../store/ws";
 {
   /*导入数据 */
 }
-import setting from "../../public/json/setting.json";
+import { webSocketUrl } from "../config/config";
 
 {
   /*创建 ws状态 */
@@ -31,7 +31,7 @@ const connectionStatusMap = {
 const useWebSocketHandler = () => {
   const wsSnapshot = useSnapshot(wsStore);
   const { readyState, sendMessage, latestMessage, disconnect, connect } =
-    useWebSocket(`${setting.webSocketUrl}`, {
+    useWebSocket(`${webSocketUrl}`, {
       reconnectLimit: 0, // 禁止自动重连
       reconnectInterval: 0, // 禁止自动重连
     });

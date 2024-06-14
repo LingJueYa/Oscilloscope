@@ -6,6 +6,8 @@ import { proxy } from "valtio";
 interface SettingStore {
   open: boolean;
   isOpen: () => void;
+  // 自动保存处理
+  autoSave: boolean;
 }
 
 export const settingStore = proxy<SettingStore>({
@@ -13,4 +15,5 @@ export const settingStore = proxy<SettingStore>({
   isOpen: () => {
     settingStore.open = !settingStore.open;
   },
+  autoSave: false,
 });
