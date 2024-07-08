@@ -1,22 +1,41 @@
-{
-  /*示波器 - 图表组件 */
-}
+// 示波器 - 波形图组件
 
-{
-  /*导入React */
-}
-import React, { useRef, useEffect, useMemo, useCallback } from "react";
-{
-  /*导入第三方库 */
-}
+// 导入React
+import { useRef, useState, useEffect, useMemo, useCallback } from "react";
+// 导入第三方库
 import { useTranslation } from "react-i18next";
 import Highcharts from "highcharts";
+import HighchartsBoost from "highcharts/modules/boost";
 import HighchartsReact from "highcharts-react-official";
-{
-  /*导入工具函数 */
-}
+// 导入工具函数
 import { downloadScreenshot } from "../../../utils/screenshotUtils";
+// 导入自定义hook
 import useWaveAsBase from "../../../hooks/useWaveAsBaseHandler";
+
+// Boost模式
+HighchartsBoost(Highcharts);
+
+// 判断是否支持WebGL
+const hasWebGLSupport = () => {
+  if (window.WebGLRenderingContext) {
+    const canvas = document.createElement("canvas");
+    const names = [
+      "webgl",
+      "experimental-webgl",
+      "webgl2",
+      "moz-webgl",
+      "webkit-3d",
+    ];
+    return names.some((name) => {
+      try {
+        return !!canvas.getContext(name);
+      } catch (e) {
+        return false;
+      }
+    });
+  }
+  return false;
+};
 
 interface OscilloscopeChartProps {
   rawData: {
@@ -25,9 +44,15 @@ interface OscilloscopeChartProps {
       readonly y: number;
     }[];
   };
+  refDownload: React.RefObject<HTMLButtonElement>;
+  refSaveWaveform: React.RefObject<HTMLButtonElement>;
 }
 
-const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
+const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({
+  rawData,
+  refDownload,
+  refSaveWaveform,
+}) => {
   const waveformRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
   const data = useMemo(
@@ -35,14 +60,32 @@ const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
     [rawData.chartData]
   );
   const { handleSaveCurrentWaveform } = useWaveAsBase(waveformRef);
-  {
-    /*图表配置 */
-  }
+  const [supportWebGL, setSupportWebGL] = useState(false);
+
+  useEffect(() => {
+    setSupportWebGL(hasWebGLSupport());
+  }, []);
+
   const chartOptions = useMemo(
     () => ({
       chart: {
         type: "line",
         height: "550px",
+        animation: false,
+      },
+      plotOptions: {
+        series: {
+          turboThreshold: 0,
+          boostThreshold: 10000, // 确保数据量不大时不启用 boost
+          states: { hover: { enabled: false } },
+          lineWidth: 3, // 设置线宽为 3 像素
+        },
+      },
+      boost: {
+        enabled: supportWebGL,
+        pixelRatio: window.devicePixelRatio,
+        useGPUTranslations: true,
+        seriesThreshold: 5,
       },
       title: {
         text: null,
@@ -63,24 +106,22 @@ const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
       },
       series: [
         {
+          boostThreshold: 10000, // 避免在数据量较小时启用 boost
+          lineWidth: 3, // 在具体 series 对象中设置 lineWidth
           name: "Waveform",
           data: data,
         },
       ],
     }),
-    [data]
+    [data, supportWebGL]
   );
-  {
-    /*截图函数 */
-  }
+
   const handleDownload = useCallback(() => {
     if (waveformRef.current) {
       downloadScreenshot(waveformRef.current, "chart-screenshot.png");
     }
   }, []);
-  {
-    /*因为 high 图表组件没有自动监听，需要手动更新数据 */
-  }
+
   useEffect(() => {
     if (waveformRef.current) {
       Highcharts.charts.forEach((chart) => {
@@ -90,9 +131,11 @@ const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
       });
     }
   }, [data]);
+
   return (
     <div className="relative w-full h-full">
       <button
+        ref={refDownload}
         type="button"
         onClick={handleDownload}
         className="absolute right-2 lg:static p-2 rounded-lg bg-yellow-400/20 text-orange-400 text-sm"
@@ -100,6 +143,7 @@ const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
         {t("oschart.export_picture")}
       </button>
       <button
+        ref={refSaveWaveform}
         type="button"
         onClick={handleSaveCurrentWaveform}
         className="absolute right-2 lg:static ml-4 p-2 rounded-lg bg-cyan-500/20 text-cyan-500 text-sm"
@@ -112,4 +156,5 @@ const OscilloscopeChart: React.FC<OscilloscopeChartProps> = ({ rawData }) => {
     </div>
   );
 };
+
 export default OscilloscopeChart;

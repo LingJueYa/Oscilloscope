@@ -68,6 +68,28 @@ const en = {
     auto_save_description:
       "When you do not select any waveform file,You can choose whether to save all or discard all",
   },
+  tour: {
+    beginTour: "Check out the tutorial",
+    run: "Run",
+    runDescription: "Click this button to start the oscilloscope running.",
+    stop: "Stop",
+    stopDescription: "Click this button to stop the oscilloscope.",
+    sampleRate: "Sampling frequency",
+    sampleRateDescription:
+      "The sampling frequency refers to the number of signals that the oscilloscope can collect per second, and the sampling frequency determines the highest frequency that the oscilloscope can capture the signal. According to Nyquist's theorem, in order to accurately measure a signal, the sampling frequency needs to be at least twice the highest frequency of the signal. High sampling frequencies provide finer waveform details.",
+    sampleInterval: "Sampling interval",
+    sampleIntervalDescription:
+      "Sampling interval refers to the time interval between two adjacent sampling points, and the sampling interval is inversely proportional to the sampling frequency. The smaller sampling interval means that the time characteristics of the signal can be measured more accurately, but it also increases the amount of data and may require more storage space.",
+    triggerMode: "Trigger mode",
+    triggerModeDescription:
+      "Trigger mode refers to the oscilloscope capture and display signal waveform starting point, the correct trigger setting can help the user to stably observe and analyze the interested part of the signal. For example, an edge trigger can capture the rising or falling edge of a signal, while a pulse trigger can capture a signal of a specific pulse width.",
+    download: "Download as picture",
+    downloadDescription:
+      "Click this button to download the current waveform to your local.",
+    saveWaveform: "Save current waveform",
+    saveWaveformDescription:
+      "Click this button to save the current waveform image for filtering after stopping the operation.",
+  },
 };
 
 export default en;

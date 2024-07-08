@@ -6,6 +6,9 @@
 }
 import { Outlet } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import {ConfigProvider} from "antd"
+import zhCN from "antd/locale/zh_CN";
+import "dayjs/locale/zh-cn";
 {
   /*导入全局样式 */
 }
@@ -31,27 +34,29 @@ const App: React.FC = () => {
   const mediaQuerySnapshot = useSnapshot(mediaQueryStore);
 
   return (
-    <div className="relative box-border flex bg-[#f6f6f6]">
-      {!mediaQuerySnapshot.isMobile && (
-        <div className="sticky top-0 left-0">
-          <Menu />
-        </div>
-      )}
-      <AnimatePresence>
-        {settingSnapshot.open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 flex justify-center h-screen pt-24 pb-10"
-          >
-            <Settings />
-          </motion.div>
+    <ConfigProvider locale={zhCN}>
+      <div className="relative box-border flex bg-[#f6f6f6]">
+        {!mediaQuerySnapshot.isMobile && (
+          <div className="sticky top-0 left-0">
+            <Menu />
+          </div>
         )}
-      </AnimatePresence>
-      <Outlet />
-    </div>
+        <AnimatePresence>
+          {settingSnapshot.open && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-50 flex justify-center h-screen pt-24 pb-10"
+            >
+              <Settings />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <Outlet />
+      </div>
+    </ConfigProvider>
   );
 };
 

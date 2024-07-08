@@ -67,6 +67,27 @@ const zh = {
     auto_save_description:
       "当您没有选择任何波形文件的时候，您可以选择是是全部保存还是全部舍弃",
   },
+  tour: {
+    beginTour: "来看看教程",
+    run: "运行",
+    runDescription: "点击这个按钮开启示波器运行。",
+    stop: "停止",
+    stopDescription: "点击这个按钮停止示波器运行。",
+    sampleRate: "采样频率",
+    sampleRateDescription:
+      "采样频率是指示波器每秒能够采集信号的点数，采样频率决定了示波器能够捕捉到信号的最高频率。根据奈奎斯特定理，为了准确测量一个信号，采样频率至少需要是信号最高频率的两倍。高采样频率可以提供更精细的波形细节。",
+    sampleInterval: "采样间隔",
+    sampleIntervalDescription:
+      "采样间隔是指相邻两个采样点之间的时间间隔，采样间隔与采样频率成反比。较小的采样间隔意味着能够更精确地测量信号的时间特性，但同时也会增加数据量，可能需要更多的存储空间。",
+    triggerMode: "触发方式",
+    triggerModeDescription:
+      "触发方式是指示波器捕获和显示信号波形的起始点，正确的触发设置可以帮助用户稳定地观察和分析感兴趣的信号部分。例如，边沿触发可以捕捉到信号的上升沿或下降沿，而脉冲触发可以捕捉到特定脉冲宽度的信号。",
+    download: "下载为图片",
+    downloadDescription: "点击这个按钮可以将目前的波形图下载到本地。",
+    saveWaveform: "保存当前波形",
+    saveWaveformDescription:
+      "点击这个按钮可以将目前的波形图保存下来，以供停止运行之后筛选。",
+  },
 };
 
 export default zh;
